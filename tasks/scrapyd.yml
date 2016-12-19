@@ -27,7 +27,8 @@
 
 - name: Install extensions
   pip: name={{item}} executable={{scrapyd_home}}/env/bin/pip
-  with_items: scrapyd_extensions
+  with_items: "{{scrapyd_extensions}}"
+  when: scrapyd_extensions is defined
 
 - name: Configure scrapy local settings
   template: src=local_settings.py.j2 dest={{scrapyd_home}}/local_settings.py owner={{scrapyd_user}}
